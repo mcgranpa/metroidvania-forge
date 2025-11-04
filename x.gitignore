@@ -1,0 +1,31 @@
+# Godot-specific folders
+.import/
+.godot/
+
+# Godot metadata files
+*.import
+*.godot
+
+# Exported binaries and packages
+*.exe
+*.dll
+*.pck
+*.apk
+*.aab
+*.zip
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.tmp
+*.bak
+*.old
+*.orig
+
+# Logs and crash reports
+*.log
+*.crash
+
+/android/
