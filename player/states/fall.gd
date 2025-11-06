@@ -22,5 +22,8 @@ func process(_delta: float) -> PlayerState:
 # runs each physics process tick for this state
 func physics_process(_delta: float) -> PlayerState:
 	if player.is_on_floor():
+		player.add_debug_indicator(Color.RED)
 		return idle
+	player.velocity.x = player.direction.x * (player.move_speed)
+
 	return next_state

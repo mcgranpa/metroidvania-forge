@@ -30,4 +30,6 @@ func process(_delta: float) -> PlayerState:
 # runs each physics process tick for this state
 func physics_process(_delta: float) -> PlayerState:
 	player.velocity.x = 0
+	if player.is_on_floor() == false:
+		return fall
 	return next_state
