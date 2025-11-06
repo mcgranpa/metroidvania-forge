@@ -1,0 +1,29 @@
+class_name PlayerStateJump extends PlayerState
+
+func init() -> void:
+	pass
+
+func enter() -> void:
+	# play animatoin
+	player.velocity.y = - player.jump_speed
+	pass
+
+func exit() -> void:
+	pass
+
+# runs when an input is pressed
+func handle_input(_event : InputEvent) -> PlayerState:
+	# add handle input code
+	return next_state
+
+# runs each process tick for this state
+func process(_delta: float) -> PlayerState:
+	return next_state
+
+# runs each physics process tick for this state
+func physics_process(_delta: float) -> PlayerState:
+	if player.is_on_floor():
+		return idle
+	elif player.velocity.y >= 0:
+		return fall
+	return next_state
