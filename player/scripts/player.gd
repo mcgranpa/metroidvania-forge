@@ -4,7 +4,8 @@ const DEBUG_JUMP_INDICATOR = preload("uid://cn3pv6slcb2b2")
 
 #region /// export vars
 @export var move_speed : float = 150.0 
-@export var jump_speed : float = 450.0 
+@export var jump_velocity : float = 450.0 
+@export var use_debug_indicator : bool = true
 #endregion
 
 #region /// State Machine Variables
@@ -17,6 +18,9 @@ var previous_state : PlayerState :
 
 #region /// standard variables
 var gravity:float = 980
+var gravity_multiplier : float = 1.0
+var default_gravity_multiplier : float = 1.0
+
 var direction: Vector2 = Vector2.ZERO
 var prev_direction: Vector2
 #endregion
@@ -24,6 +28,7 @@ var prev_direction: Vector2
 
 func _ready() -> void:
 	initialize_states()
+	gravity_multiplier = default_gravity_multiplier
 	#gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -36,7 +41,7 @@ func _process(_delta: float) -> void:
 	pass
 	
 func _physics_process(_delta: float) -> void:
-	velocity.y += gravity * _delta
+	velocity.y += (gravity * gravity_multiplier) * _delta
 	move_and_slide()
 	change_state(current_state.physics_process(_delta))
 	pass
@@ -84,13 +89,14 @@ func update_direction() -> void:
 	pass
 	
 func add_debug_indicator(color : Color = Color.RED) -> void:
+	if use_debug_indicator == false:
+		return
 	var d : Node2D = DEBUG_JUMP_INDICATOR.instantiate()
 	get_tree().root.add_child(d)
 	d.global_position = global_position
 	d.modulate = color
 	await get_tree().create_timer( 3.0 ).timeout
 	d.queue_free()
-	
 	pass
 	
 	

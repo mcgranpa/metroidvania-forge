@@ -64,6 +64,18 @@ metadata/_edit_group_ = true
 shape = SubResource("RectangleShape2D_edjgo")
 debug_color = Color(0, 0.6, 0.69803923, 0.30980393)
 
+[node name="Sprite2D7" type="Sprite2D" parent="."]
+position = Vector2(410.00003, 166)
+scale = Vector2(1.796875, 6.242188)
+texture = SubResource("GradientTexture2D_rupst")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D7"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D7/StaticBody2D"]
+shape = SubResource("RectangleShape2D_edjgo")
+debug_color = Color(0, 0.6, 0.69803923, 0.30980393)
+
 [node name="Sprite2D6" type="Sprite2D" parent="."]
 position = Vector2(63.000004, 184)
 scale = Vector2(2.1796865, 2.4843757)
@@ -90,4 +102,4 @@ shape = SubResource("RectangleShape2D_edjgo")
 debug_color = Color(0, 0.6, 0.69803923, 0.30980393)
 
 [node name="Player" parent="." instance=ExtResource("1_rupst")]
-position = Vector2(91, 62)
+position = Vector2(404, 56)

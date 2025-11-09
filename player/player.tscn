@@ -32,6 +32,7 @@ script = ExtResource("4_qjkh3")
 [node name="fall" type="Node" parent="States"]
 unique_name_in_owner = true
 script = ExtResource("5_g6k8r")
+jump_buffer_time = 0.1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -24)
