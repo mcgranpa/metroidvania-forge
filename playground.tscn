@@ -1,10 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://1opnyf12gfpt"]
+[gd_scene load_steps=7 format=3 uid="uid://1opnyf12gfpt"]
 
 [ext_resource type="PackedScene" uid="uid://xhvlothbeiv3" path="res://player/player.tscn" id="1_rupst"]
 
 [sub_resource type="Gradient" id="Gradient_edjgo"]
 offsets = PackedFloat32Array(0, 0.99333334, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.014275216, 0.014275219, 0.014275208, 1, 0.008202022, 0.008202025, 0.008202025, 1)
+colors = PackedColorArray(0.34117648, 0.3137255, 0, 1, 0.014275216, 0.014275219, 0.014275208, 1, 0.008202022, 0.008202025, 0.008202025, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_rupst"]
 gradient = SubResource("Gradient_edjgo")
@@ -13,6 +13,16 @@ height = 32
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edjgo"]
 size = Vector2(32, 32)
+
+[sub_resource type="Gradient" id="Gradient_rupst"]
+offsets = PackedFloat32Array(0, 0.87333333, 1)
+colors = PackedColorArray(0, 0, 5.7063603, 1, 0.015686275, 0.015686275, 0.92156863, 1, 0.008202022, 0.008202025, 0.008202025, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wt17y"]
+gradient = SubResource("Gradient_rupst")
+width = 32
+height = 32
+fill_to = Vector2(0, 1)
 
 [node name="Playground" type="Node2D"]
 
@@ -101,5 +111,20 @@ metadata/_edit_group_ = true
 shape = SubResource("RectangleShape2D_edjgo")
 debug_color = Color(0, 0.6, 0.69803923, 0.30980393)
 
+[node name="oneway_platform" type="Sprite2D" parent="."]
+position = Vector2(253.00002, 161)
+scale = Vector2(1.796875, 0.46093795)
+texture = SubResource("GradientTexture2D_wt17y")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="oneway_platform"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="oneway_platform/StaticBody2D"]
+position = Vector2(1.1130371, 0)
+shape = SubResource("RectangleShape2D_edjgo")
+one_way_collision = true
+debug_color = Color(0, 0.6, 0.69803923, 0.30980393)
+
 [node name="Player" parent="." instance=ExtResource("1_rupst")]
-position = Vector2(404, 56)
+position = Vector2(250, 234)

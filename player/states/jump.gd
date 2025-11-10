@@ -18,6 +18,7 @@ func handle_input(_event : InputEvent) -> PlayerState:
 	# add handle input code
 	if _event.is_action_released("jump"):
 		#player.velocity.y = 0
+		# speed up player fall rate
 		player.velocity.y *= 0.5
 		return fall
 	return next_state

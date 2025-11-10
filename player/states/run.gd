@@ -21,6 +21,9 @@ func handle_input(_event : InputEvent) -> PlayerState:
 func process(_delta: float) -> PlayerState:
 	if player.direction.x == 0:
 		return idle
+	# sensitivy check for joystick
+	if player.direction.y > sensitivity_check:
+		return crouch
 	return next_state
 
 # runs each physics process tick for this state
