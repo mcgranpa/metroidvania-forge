@@ -75,8 +75,8 @@ shape = SubResource("RectangleShape2D_edjgo")
 debug_color = Color(0, 0.6, 0.69803923, 0.30980393)
 
 [node name="Sprite2D7" type="Sprite2D" parent="."]
-position = Vector2(410.00003, 166)
-scale = Vector2(1.796875, 6.242188)
+position = Vector2(391.625, 166)
+scale = Vector2(0.64843637, 6.242188)
 texture = SubResource("GradientTexture2D_rupst")
 metadata/_edit_group_ = true
 
@@ -127,4 +127,4 @@ one_way_collision = true
 debug_color = Color(0, 0.6, 0.69803923, 0.30980393)
 
 [node name="Player" parent="." instance=ExtResource("1_rupst")]
-position = Vector2(250, 234)
+position = Vector2(392, 63)

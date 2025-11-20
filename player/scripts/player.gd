@@ -5,6 +5,8 @@ const DEBUG_JUMP_INDICATOR = preload("uid://cn3pv6slcb2b2")
 #region /// export variables
 @export var move_speed : float = 150.0 
 @export var jump_velocity : float = 450.0 
+@export var max_fall_velocity : float = 600.0
+@export var max_jump_velocity : float = 9000.0
 @export var use_debug_indicator : bool = true
 #endregion
 
@@ -28,7 +30,6 @@ var previous_state : PlayerState :
 var gravity:float = 980
 var gravity_multiplier : float = 1.0
 var default_gravity_multiplier : float = 1.0
-
 var direction: Vector2 = Vector2.ZERO
 #endregion
 
@@ -49,6 +50,8 @@ func _process(_delta: float) -> void:
 	
 func _physics_process(_delta: float) -> void:
 	velocity.y += (gravity * gravity_multiplier) * _delta
+	# limit the y velocity within range of upward velocity and downward velocity
+	velocity.y = clampf(velocity.y,-max_jump_velocity, max_fall_velocity)
 	move_and_slide()
 	change_state(current_state.physics_process(_delta))
 	pass
