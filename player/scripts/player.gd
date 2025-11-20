@@ -94,12 +94,12 @@ func update_direction() -> void:
 	var y_axis = Input.get_axis("up", "down")
 	direction = Vector2(x_axis, y_axis)
 	if prev_direction.x != direction.x:
-		if direction.x != 0:
-			player_sprite.flip_h = !player_sprite.flip_h
-		#if direction.x < 0:
-			#player_sprite.flip_h = true
-		#elif direction.x > 0:
-			#player_sprite.flip_h = false
+		#if direction.x != 0:
+			#player_sprite.flip_h = !player_sprite.flip_h
+		if direction.x < 0:
+			player_sprite.flip_h = true
+		elif direction.x > 0:
+			player_sprite.flip_h = false
 		pass
 		
 	
