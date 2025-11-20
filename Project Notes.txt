@@ -1,0 +1,13 @@
+In Crouch state
+add code to allow right/left movement while crouched
+in physics process add this
+#player.velocity.x = player.direction.x * player.move_speed * decelaration_rate 
+and comment out the code to slow movement when entering crouch state 
+player.velocity.x = player.velocity.x * (decelaration_rate * _delta)
+
+
+
+In Idle state
+	##### why is this check here?
+	if player.is_on_floor() == false:
+		return fall
