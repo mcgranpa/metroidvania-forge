@@ -7,7 +7,7 @@ const DEBUG_JUMP_INDICATOR = preload("uid://cn3pv6slcb2b2")
 @export var jump_velocity : float = 450.0 
 @export var max_fall_velocity : float = 600.0
 @export var max_jump_velocity : float = 9000.0
-@export var use_debug_indicator : bool = true
+@export var use_debug_indicator : bool = false
 #endregion
 
 #region /// onready variables
@@ -16,6 +16,7 @@ const DEBUG_JUMP_INDICATOR = preload("uid://cn3pv6slcb2b2")
 @onready var collision_crouch: CollisionShape2D = $CollisionCrouch
 @onready var one_way_platform_raycast: ShapeCast2D = $OneWayPlatformRaycast
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var state_label: Label = $StateLabel
 #endregion
 
 #region /// State Machine Variables
@@ -38,6 +39,11 @@ func _ready() -> void:
 	initialize_states()
 	gravity_multiplier = default_gravity_multiplier
 	#gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+	
+	# if debugging is on make label visable
+	if use_debug_indicator:
+		state_label.visible = true
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	change_state(current_state.handle_input(event))
@@ -72,7 +78,10 @@ func initialize_states() -> void:
 		state.init()
 	
 	current_state.enter()
-	$Label.text = current_state.name
+	
+	# display State if debugging in on 
+	if use_debug_indicator:
+		state_label.text = current_state.name
 	pass
 	
 func change_state ( new_state:PlayerState) -> void:
@@ -88,7 +97,9 @@ func change_state ( new_state:PlayerState) -> void:
 	current_state.enter()
 	# keeps the list of states from growing too large
 	states.resize(3)
-	$Label.text = current_state.name
+	# display State if debugging in on 
+	if use_debug_indicator:
+		state_label.text = current_state.name
 	pass
 	
 func update_direction() -> void:
@@ -98,7 +109,7 @@ func update_direction() -> void:
 	direction = Vector2(x_axis, y_axis)
 	if prev_direction.x != direction.x:
 		#if direction.x != 0:
-			#player_sprite.flip_h = !player_sprite.flip_h
+			#player_sprite.flip_h = not player_sprite.flip_h
 		if direction.x < 0:
 			player_sprite.flip_h = true
 		elif direction.x > 0:
@@ -109,7 +120,8 @@ func update_direction() -> void:
 	pass
 	
 func add_debug_indicator(color : Color = Color.RED) -> void:
-	if use_debug_indicator == false:
+	# bypass if debugging is off 
+	if not use_debug_indicator:
 		return
 	var d : Node2D = DEBUG_JUMP_INDICATOR.instantiate()
 	get_tree().root.add_child(d)

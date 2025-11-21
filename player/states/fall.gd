@@ -28,6 +28,7 @@ func enter() -> void:
 func exit() -> void:
 	#print("fall end velocity: ", player.velocity.y)
 	player.gravity_multiplier = player.default_gravity_multiplier
+	buffer_timer = 0
 	pass
 
 # runs when an input is pressed
@@ -50,6 +51,12 @@ func process(_delta: float) -> PlayerState:
 func physics_process(_delta: float) -> PlayerState:
 	if player.is_on_floor():
 		player.add_debug_indicator(Color.RED)
+		# for jump buffer to work, jump buttone must 
+		# still be held down to avoid bug that prevents
+		# variable jump from working if jump button 
+		# released before enter the jump state this is one fix
+		# see jump state for another fix 
+		## if buffer_timer > 0.0 and Input.is_action_pressed("jump"):
 		if buffer_timer > 0.0:
 			return jump
 		return idle

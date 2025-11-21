@@ -11,6 +11,17 @@ func enter() -> void:
 	player.add_debug_indicator(Color.GREEN)
 	player.velocity.y = - player.jump_velocity
 	#print("jump start velocity: ", player.velocity.y)
+	
+	# second version of jump buffer fix. if prior state was 
+	# fall then this was triggered by jump buffer condition
+	# so if jump button is not pressed we need to trigger the
+	# variable jump but need to wait one frame else could get
+	# caught in a loop of state changes
+	if player.previous_state == fall and not Input.is_action_pressed("jump"):
+		await get_tree().physics_frame
+		player.velocity.y *= 0.5
+		player.change_state(fall)
+		
 	pass
 
 func exit() -> void:
@@ -20,7 +31,12 @@ func exit() -> void:
 
 # runs when an input is pressed
 func handle_input(_event : InputEvent) -> PlayerState:
-	# add handle input code
+	# adds ability to do a small jump but
+	# if button alread released prior to entering 
+	# jump state, this will fail.  This can happen during
+	# the jump buffer test in the fall state. there are 2 
+	# fixes, one in the fall state and the other above in the 
+	# enter function. 
 	if _event.is_action_released("jump"):
 		#player.velocity.y = 0
 		# speed up player fall rate
