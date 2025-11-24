@@ -12,7 +12,7 @@ config_version=5
 
 config/name="MetroidvaniaForge"
 config/tags=PackedStringArray("michaelgames")
-run/main_scene="uid://1opnyf12gfpt"
+run/main_scene="uid://blprympc7dgxv"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="uid://bj0c36c8hqcu7"
 
@@ -88,6 +88,10 @@ action={
 
 2d_physics/layer_1="Ground"
 2d_physics/layer_2="One Way Platform"
+
+[physics]
+
+common/max_physics_steps_per_frame=4
 
 [rendering]
 
