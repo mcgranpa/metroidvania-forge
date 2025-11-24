@@ -17,6 +17,7 @@ const DEBUG_JUMP_INDICATOR = preload("uid://cn3pv6slcb2b2")
 @onready var one_way_platform_raycast: ShapeCast2D = $OneWayPlatformRaycast
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var state_label: Label = $StateLabel
+@onready var camera_2d: Camera2D = $Camera2D
 #endregion
 
 #region /// State Machine Variables
